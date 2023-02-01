@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/list_id"
+        android:icon="@drawable/baseline_format_list_bulleted_24"
+        android:title="@string/list" />
+
+    <item
+        android:id="@+id/attendance_id"
+        android:icon="@drawable/baseline_attendence_24"
+        android:title="@string/attendance" />
+
+    <item
+        android:id="@+id/placeHolder_id"
+        android:title="" />
+
+    <item
+        android:id="@+id/plan_id"
+        android:icon="@drawable/baseline_plan_24"
+        android:title="Edu-plan" />
+
+    <item
+        android:id="@+id/list1_id"
+        android:icon="@drawable/baseline_format_list_bulleted_24"
+        android:title="@string/list" />
+</menu>

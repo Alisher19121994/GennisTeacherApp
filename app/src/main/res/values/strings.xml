@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GennisTeacherApp</string>
+    <string name="list">List</string>
+    <string name="attendance">Attendance</string>
+</resources>
