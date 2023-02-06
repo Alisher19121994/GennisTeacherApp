@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".activities.TeacherPageActivity">
 
 
@@ -26,9 +28,22 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/back_linear_id"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_marginStart="4dp"
+                        android:src="@drawable/baseline_keyboard_backspace_24" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:gravity="center_vertical">
 
                     <ImageView
@@ -44,58 +59,74 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager_main_activity_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="56dp" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomnavigation_id"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="start"
+            android:background="#07000000"
+            android:elevation="8dp"
+            app:elevation="0dp"
+            app:itemIconSize="24dp"
+            app:itemIconTint="#0F90F6"
+            app:itemTextColor="#0F90F6"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navigation" />
+
+
+    </RelativeLayout>
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="bottom"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <FrameLayout
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager_main_activity_id"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="bottom"
+                android:elevation="8sp">
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/bottomnavigation_id"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="#40000000"
+                    android:layout_height="match_parent"
+                    android:background="#07000000"
                     app:elevation="0dp"
                     app:itemIconSize="24dp"
-                    app:itemIconTint="#80000000"
-                    app:itemTextColor="#000000"
+                    app:itemIconTint="#0F90F6"
+                    app:itemTextColor="#0F90F6"
                     app:labelVisibilityMode="labeled"
                     app:menu="@menu/bottom_navigation" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center">
+            </LinearLayout>
 
 
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/fab_id"
-                        android:layout_width="55dp"
-                        android:layout_height="55dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/baseline_add_24"
-                        app:backgroundTint="#39A1F4"
-                        app:borderWidth="0dp"
-                        app:fabSize="normal"
 
-                        />
+        </FrameLayout>
 
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-
-
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

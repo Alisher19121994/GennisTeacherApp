@@ -6,10 +6,12 @@ import android.os.CountDownTimer
 import android.view.Window
 import android.view.WindowManager
 import com.example.gennisteacherapp.R
+import com.example.gennisteacherapp.network.SharedPrefManager
 import java.util.Objects
 
 class SplashActivity : BaseActivity() {
 
+    private lateinit var sharedPrefManager: SharedPrefManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,13 @@ class SplashActivity : BaseActivity() {
             }
 
             override fun onFinish() {
-                openMainActivity(context)
+                if (sharedPrefManager.isLoggedIn) {
+                    openMainActivity(context)
+                    finish()
+                } else {
+                    openLogInActivity(context)
+                    finish()
+                }
             }
 
         }.start()

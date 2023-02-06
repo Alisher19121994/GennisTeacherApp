@@ -12,16 +12,13 @@
         android:title="@string/attendance" />
 
     <item
-        android:id="@+id/placeHolder_id"
-        android:title="" />
+        android:id="@+id/add_id"
+        android:title="@string/create"
+        android:icon="@drawable/baseline_add_circle_outline_24"/>
 
     <item
         android:id="@+id/plan_id"
         android:icon="@drawable/baseline_plan_24"
-        android:title="Edu-plan" />
+        android:title="@string/edu_plan" />
 
-    <item
-        android:id="@+id/list1_id"
-        android:icon="@drawable/baseline_format_list_bulleted_24"
-        android:title="@string/list" />
 </menu>

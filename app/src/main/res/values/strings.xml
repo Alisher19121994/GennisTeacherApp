@@ -2,4 +2,14 @@
     <string name="app_name">GennisTeacherApp</string>
     <string name="list">List</string>
     <string name="attendance">Attendance</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="log_in">Log In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="don_t_you_have_any_account_yet">Don\'t you have any account yet?</string>
+    <string name="edu_plan">Edu-plan</string>
+    <string name="create">Create</string>
 </resources>
