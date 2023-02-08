@@ -15,8 +15,8 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             return User(
                 sharedPreferences.getInt("id", -1),
-                sharedPreferences.getString("email", null).toString(),
-                sharedPreferences.getString("name", null).toString(),
+                sharedPreferences.getString("username", null)!!,
+                sharedPreferences.getString("password", null)!!
             )
         }
 
@@ -41,7 +41,7 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
     }
 
     companion object {
-        private val SHARED_PREF_NAME = "my_shared_preff"
+        private const val SHARED_PREF_NAME = "my_shared_preff"
         private var mInstance: SharedPrefManager? = null
         @Synchronized
         fun getInstance(mCtx: Context): SharedPrefManager {

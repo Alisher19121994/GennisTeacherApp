@@ -3,6 +3,7 @@ package com.example.gennisteacherapp.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import com.example.gennisteacherapp.R
@@ -11,7 +12,7 @@ import java.util.Objects
 
 class SplashActivity : BaseActivity() {
 
-    private lateinit var sharedPrefManager: SharedPrefManager
+    private var sharedPrefManager: SharedPrefManager?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,13 +34,15 @@ class SplashActivity : BaseActivity() {
             }
 
             override fun onFinish() {
-                if (sharedPrefManager.isLoggedIn) {
-                    openMainActivity(context)
-                    finish()
-                } else {
+                Log.d("@@@", "XATO")
+
+                //if (sharedPrefManager!!.isLoggedIn) {
+                 //   openMainActivity(context)
+                   // finish()
+               // } else {
                     openLogInActivity(context)
-                    finish()
-                }
+                    //finish()
+                //}
             }
 
         }.start()

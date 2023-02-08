@@ -20,9 +20,6 @@ import retrofit2.Response
 
 class LogInActivity : BaseActivity() {
 
-    private var TAG = LogInActivity::class.java.simpleName
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
@@ -62,19 +59,25 @@ class LogInActivity : BaseActivity() {
 
         //  val userRequest = UserRequest(username, password)
 
-        RetrofitHttp.retrofitService.postMethod(username, password).enqueue(object : Callback<LoginResponse> {
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+        RetrofitHttp.retrofitService.postMethod(username, password)
+            .enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
 
-                   // if (response.body()?.error != false) {
-                        if(!response.body()?.error!!){
-                        Log.d("@@@", response.body().toString())
+                    if (response.body()?.error ==true) {
+                  //  if (!response.body()?.error!!) {
+                        Log.d("@@@", "response.body().toString()")
 
-                        SharedPrefManager.getInstance(applicationContext).saveUser(response.body()?.user!!)
+                        SharedPrefManager.getInstance(applicationContext)
+                            .saveUser(response.body()?.user!!)
 
                         val intent = Intent(applicationContext, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
-                            toast("Logged in")
+                        toast("Logged in")
                     }
 
 /*
