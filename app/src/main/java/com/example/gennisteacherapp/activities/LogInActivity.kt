@@ -17,6 +17,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * In this LogInActivity,that the user can log in with his/her username and password,
+ * which are given by Admin
+ * LogInActivity is based to BaseActivity
+ * */
 class LogInActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +51,6 @@ class LogInActivity : BaseActivity() {
         }
     }
 
-
     private fun getLogInData() {
 
         val dialog = Dialog(context)
@@ -65,7 +69,6 @@ class LogInActivity : BaseActivity() {
                 ) {
 
                     if (response.isSuccessful) {
-                        //  if (!response.body()?.error!!) {
                         Log.d("@@@_true", response.body().toString())
 
                         LogInDatabase.getDatabase(this@LogInActivity).logInDao().addData(
@@ -75,12 +78,7 @@ class LogInActivity : BaseActivity() {
                                 response.body()?.surname!! // surname is password?
                             )
                         )
-
-
                         openMainActivity(context)
-//                        val intent = Intent(applicationContext, MainActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                        startActivity(intent)
                         toast("Logged in")
                     }
 
@@ -95,7 +93,6 @@ class LogInActivity : BaseActivity() {
                 }
             })
     }
-
 
     private fun validation(username: String, password: String) {
 
@@ -118,3 +115,6 @@ class LogInActivity : BaseActivity() {
         }
     }
 }
+//                        val intent = Intent(applicationContext, MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                        startActivity(intent)
