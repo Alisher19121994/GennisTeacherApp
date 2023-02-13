@@ -1,17 +1,16 @@
 package com.example.gennisteacherapp.activities
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.example.gennisteacherapp.R
-import com.example.gennisteacherapp.model.login.UserRequest
-import com.example.gennisteacherapp.model.login.UserResponse
-import com.example.gennisteacherapp.network.RetrofitHttp
-import com.example.gennisteacherapp.network.SharedPrefManager
-import com.example.gennisteacherapp.newModel.LoginResponse
+import com.example.gennisteacherapp.model.room.UserSignIn
+import com.example.gennisteacherapp.model.login.LoginRequest
+import com.example.gennisteacherapp.model.login.LoginResponse
+import com.example.gennisteacherapp.network.retrofit.RetrofitHttp
+import com.example.gennisteacherapp.network.roomDatabase.LogInDatabase
 import com.example.gennisteacherapp.utils.Extensions.toast
 import kotlinx.android.synthetic.main.activity_log_in.*
 import retrofit2.Call
@@ -56,52 +55,42 @@ class LogInActivity : BaseActivity() {
         val username = sign_in_username_candidate_id.text.toString().trim()
         val password = sign_in_password_candidate_id.text.toString().trim()
         validation(username, password)
+        val loginRequest = LoginRequest(username, password)
 
-        //  val userRequest = UserRequest(username, password)
-
-        RetrofitHttp.retrofitService.postMethod(username, password)
+        RetrofitHttp.retrofitService.postMethod(loginRequest)
             .enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(
                     call: Call<LoginResponse>,
                     response: Response<LoginResponse>
                 ) {
 
-                    if (response.body()?.error ==true) {
-                  //  if (!response.body()?.error!!) {
-                        Log.d("@@@", "response.body().toString()")
+                    if (response.isSuccessful) {
+                        //  if (!response.body()?.error!!) {
+                        Log.d("@@@_true", response.body().toString())
 
-                        SharedPrefManager.getInstance(applicationContext)
-                            .saveUser(response.body()?.user!!)
+                        LogInDatabase.getDatabase(this@LogInActivity).logInDao().addData(
+                            UserSignIn(
+                                response.body()?.id!!,
+                                response.body()?.username!!,
+                                response.body()?.surname!! // surname is password?
+                            )
+                        )
 
-                        val intent = Intent(applicationContext, MainActivity::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
+
+                        openMainActivity(context)
+//                        val intent = Intent(applicationContext, MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                        startActivity(intent)
                         toast("Logged in")
                     }
 
-/*
-  if (response.body()?.isChecked == true) {
-//  if (response.body() != null) {
-// if (response.body().isChecked ) {
-
-   openMainActivity(context)
-
-   toast("Logged in")
-   dismissProgressBar(dialog)
-} else {
-   dismissProgressBar(dialog)
-   toast("Username or Password error!")
-}
-*/
-
                     dismissProgressBar(dialog)
-                    Log.d("@@@@@@@@", response.body().toString())
+                    Log.d("@@@@@@@@Success", response.body().toString())
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     dismissProgressBar(dialog)
-                    Log.d("@@@@@@@@@", t.message.toString())
+                    Log.d("@@@@@@@@@_####Falure", t.message.toString())
                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                 }
             })

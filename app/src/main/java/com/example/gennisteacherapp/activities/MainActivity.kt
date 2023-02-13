@@ -1,14 +1,11 @@
 package com.example.gennisteacherapp.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import com.example.gennisteacherapp.R
 import com.example.gennisteacherapp.adapter.GroupTitlesAdapter
-import com.example.gennisteacherapp.model.GroupPage
+import com.example.gennisteacherapp.model.inner.GroupPage
 
 class MainActivity : BaseActivity() {
 

@@ -13,7 +13,7 @@ import com.example.gennisteacherapp.R
 import com.example.gennisteacherapp.adapter.ListOfStudentsAdapter
 import com.example.gennisteacherapp.adapter.helper.RecyclerItemTouchHelper
 import com.example.gennisteacherapp.adapter.helper.RecyclerItemTouchHelperListener
-import com.example.gennisteacherapp.model.Students
+import com.example.gennisteacherapp.model.inner.Students
 import kotlinx.android.synthetic.main.fragment_lists.*
 import kotlinx.android.synthetic.main.fragment_lists.view.*
 

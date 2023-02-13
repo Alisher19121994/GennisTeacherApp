@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gennisteacherapp.R
 import com.example.gennisteacherapp.activities.MainActivity
-import com.example.gennisteacherapp.model.GroupPage
+import com.example.gennisteacherapp.model.inner.GroupPage
 
 class GroupTitlesAdapter(
     var mainActivity: MainActivity,

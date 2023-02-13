@@ -7,9 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gennisteacherapp.R
-import com.example.gennisteacherapp.activities.MainActivity
-import com.example.gennisteacherapp.model.GroupPage
-import com.example.gennisteacherapp.model.Students
+import com.example.gennisteacherapp.model.inner.Students
 import com.google.android.material.imageview.ShapeableImageView
 
 class ListOfStudentsAdapter(
