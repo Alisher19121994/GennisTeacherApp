@@ -1,13 +1,23 @@
 package com.example.gennisteacherapp.model.room
 
 import androidx.room.ColumnInfo
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-data class UserSignIn(
+@Entity(tableName = "user_table")
+class UserSignIn {
     @PrimaryKey(autoGenerate = true)
-    var id:Int,
-    @ColumnInfo(name = "username")
-    val username: String,
-    @ColumnInfo(name = "password")
-    val password: String
-)
+    var id: Int = 0
+    var username: String? = null
+    var isLogged: Boolean? = null
+
+    constructor()
+    constructor(isLoggedIn: Boolean) {
+        this.isLogged = isLoggedIn
+    }
+
+    constructor(user: String, isLoggedIn: Boolean) {
+        this.username = user
+        this.isLogged = isLoggedIn
+    }
+}

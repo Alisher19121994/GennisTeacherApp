@@ -1,16 +1,18 @@
 package com.example.gennisteacherapp.activities
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.example.gennisteacherapp.R
-import com.example.gennisteacherapp.model.room.UserSignIn
-import com.example.gennisteacherapp.model.login.LoginRequest
 import com.example.gennisteacherapp.model.login.LoginResponse
+import com.example.gennisteacherapp.model.login.LoginRequest
+import com.example.gennisteacherapp.model.room.UserSignIn
 import com.example.gennisteacherapp.network.retrofit.RetrofitHttp
 import com.example.gennisteacherapp.network.roomDatabase.LogInDatabase
+import com.example.gennisteacherapp.network.roomDatabase.SessionManager
 import com.example.gennisteacherapp.utils.Extensions.toast
 import kotlinx.android.synthetic.main.activity_log_in.*
 import retrofit2.Call
@@ -24,11 +26,15 @@ import retrofit2.Response
  * */
 class LogInActivity : BaseActivity() {
 
+    lateinit var SHARED_PREFS: String
+
+    lateinit var token: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
 
         initViews()
+
     }
 
     private fun initViews() {
@@ -39,8 +45,8 @@ class LogInActivity : BaseActivity() {
         }
 
         sign_in_sign_in_button_textview_candidate_id.setOnClickListener {
-            if (TextUtils.isEmpty(sign_in_username_candidate_id.text.toString()) ||
-                TextUtils.isEmpty(sign_in_password_candidate_id.text.toString())
+            if (TextUtils.isEmpty(sign_in_username_candidate_id.text.toString())
+               || TextUtils.isEmpty(sign_in_password_candidate_id.text.toString())
             ) {
 
                 Toast.makeText(this, "Username or Password Required", Toast.LENGTH_LONG).show();
@@ -49,8 +55,8 @@ class LogInActivity : BaseActivity() {
                 getLogInData()
             }
         }
+        //isLoggedIn()
     }
-
     private fun getLogInData() {
 
         val dialog = Dialog(context)
@@ -58,63 +64,86 @@ class LogInActivity : BaseActivity() {
 
         val username = sign_in_username_candidate_id.text.toString().trim()
         val password = sign_in_password_candidate_id.text.toString().trim()
-        validation(username, password)
+        validationData(username, password)
+
         val loginRequest = LoginRequest(username, password)
 
-        RetrofitHttp.retrofitService.postMethod(loginRequest)
-            .enqueue(object : Callback<LoginResponse> {
-                override fun onResponse(
-                    call: Call<LoginResponse>,
-                    response: Response<LoginResponse>
-                ) {
+        RetrofitHttp.retrofitService().postMethod(loginRequest).enqueue(object : Callback<LoginResponse> {
+
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
 
                     if (response.isSuccessful) {
-                        Log.d("@@@_true", response.body().toString())
+//                        val sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE)
+//                        val editor = sharedPreferences.edit()
+//                        editor.putString(response.body()?.data?.username, "true")
+//                        editor.apply()
 
-                        LogInDatabase.getDatabase(this@LogInActivity).logInDao().addData(
-                            UserSignIn(
-                                response.body()?.id!!,
-                                response.body()?.username!!,
-                                response.body()?.surname!! // surname is password?
-                            )
-                        )
-                        openMainActivity(context)
+                        val data = response.body()
+                        val sessionManager = SessionManager(context)
+                        sessionManager.saveAuthToken(data?.data!!.access_token)
+                        Log.d("response@@Success", data.toString())
+
+//                        val intent = Intent(this@LogInActivity, MainActivity::class.java)
+//                        val bundle = Bundle()
+//                        bundle.putSerializable("username", data.data.username)
+//                        bundle.putSerializable("success",data.success)
+//                        intent.putExtras(bundle)
+//                        startActivity(intent)
+
+
+                        val userSignIn = UserSignIn()
+                        userSignIn.username = response.body()?.data!!.username
+                        userSignIn.isLogged = response.body()?.success
+
+                        LogInDatabase.getDatabase(context)?.logInDao()?.registerUser(userSignIn)
                         toast("Logged in")
                     }
-
                     dismissProgressBar(dialog)
                     Log.d("@@@@@@@@Success", response.body().toString())
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    toast("Error")
                     dismissProgressBar(dialog)
                     Log.d("@@@@@@@@@_####Falure", t.message.toString())
                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                 }
+
             })
+
     }
 
-    private fun validation(username: String, password: String) {
-
-        sign_in_username_candidate_id.setOnClickListener {
-            if (username.isEmpty()) {
-                sign_in_username_candidate_id.requestFocus()
-                sign_in_username_candidate_id.error = "Username must NOT be empty"
-            } else {
-                sign_in_username_candidate_id.error = null
-            }
+    private fun isLoggedIn() {
+        val sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getString("name", "")
+        if (isLoggedIn.equals("true")) {
+            openMainActivity(context)
+            finish()
         }
-        if (password.isEmpty()) {
-            sign_in_password_candidate_id.setOnClickListener {
-                if (password.isEmpty() || !password.matches("a-zA-Z0-9".toRegex())) {
+    }
+
+    private fun validationData(username: String, password: String) {
+
+        if (username == "") {
+            sign_in_username_candidate_id.requestFocus()
+            sign_in_username_candidate_id.error = "Username must NOT be empty"
+
+        } else if (password == "") {
+            sign_in_password_candidate_id.requestFocus()
+            sign_in_password_candidate_id.error = "Password must NOT be empty"
+        } else {
+            sign_in_sign_in_button_textview_candidate_id.setOnClickListener {
+                if (username.isEmpty()) {
+                    sign_in_username_candidate_id.requestFocus()
+                    sign_in_username_candidate_id.error = "Username must NOT be empty"
+                } else if (password.isEmpty()) {
                     sign_in_password_candidate_id.requestFocus()
                     sign_in_password_candidate_id.error = "Password must NOT be empty"
-
                 }
+
             }
         }
+
+
     }
 }
-//                        val intent = Intent(applicationContext, MainActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                        startActivity(intent)

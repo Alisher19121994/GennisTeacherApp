@@ -12,4 +12,6 @@
     <string name="don_t_you_have_any_account_yet">Don\'t you have any account yet?</string>
     <string name="edu_plan">Edu-plan</string>
     <string name="create">Create</string>
+    <string name="save">Save</string>
+    <string name="date">Date</string>
 </resources>

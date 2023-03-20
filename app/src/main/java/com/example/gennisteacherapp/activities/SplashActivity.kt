@@ -1,11 +1,14 @@
 package com.example.gennisteacherapp.activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.WindowManager
 import com.example.gennisteacherapp.R
+import com.example.gennisteacherapp.model.room.UserSignIn
 import com.example.gennisteacherapp.network.roomDatabase.LogInDatabase
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +26,14 @@ class SplashActivity : BaseActivity() {
 
         object : CountDownTimer(2000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-
             }
 
             override fun onFinish() {
-                if (LogInDatabase.isLoggedIn) {
+                val userSignIn = UserSignIn()
+                userSignIn.username
+                userSignIn.isLogged = true
+                val isLoggedIn = LogInDatabase.getDatabase(context)?.logInDao()?.loginUser()
+                if (isLoggedIn!!.contains(userSignIn)) {
                     openMainActivity(context)
                 } else {
                     openLogInActivity(context)

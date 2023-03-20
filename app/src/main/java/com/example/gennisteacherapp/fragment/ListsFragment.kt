@@ -27,10 +27,14 @@ class ListsFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
+    companion object {
+        var USER_ID = "user_id"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view: View = inflater.inflate(R.layout.fragment_lists, container, false)
         initViews(view)
         return view
@@ -40,29 +44,54 @@ class ListsFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.list_RecyclerViews_id)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
 
-        val itemTouchHelperCallback = RecyclerItemTouchHelper(0, ItemTouchHelper.RIGHT, object : RecyclerItemTouchHelperListener {
-                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
+        val itemTouchHelperCallback = RecyclerItemTouchHelper(
+            0,
+            ItemTouchHelper.RIGHT,
+            object : RecyclerItemTouchHelperListener {
+                override fun onSwiped(
+                    viewHolder: RecyclerView.ViewHolder,
+                    direction: Int,
+                    position: Int
+                ) {
                 }
             })
 
         ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
 
+       // swipeRefreshLayout(view)
 
-      //  view.swipeRefreshLayout_id.setOnRefreshListener {
-           
-            refreshAdapter(data())
 
+        //  view.swipeRefreshLayout_id.setOnRefreshListener {
+
+        refreshAdapter(data())
+      //  val a = arguments?.getString("user_id", "Begzod")
+
+    }
+
+    private fun swipeRefreshLayout(view: View) {
+        view.swipeRefreshLayout_id.setColorSchemeResources(R.color.run)
+        swipeRefreshLayout_id.setOnRefreshListener {
+            //apiList()
+        }
     }
 
     private fun data(): ArrayList<Students> {
         val l = ArrayList<Students>()
 
-        for (i in 1..20) {
+        for (i in 1..10) {
             l.add(Students(R.drawable.bekzod, "Daminov", "Alisher"))
         }
         return l
+        // onResponse-> ....some data
+        //refreshAdapter(list) bellow
+        // swipeRefreshLayout_id.setRefreshing(false)
     }
 
     private fun refreshAdapter(data: ArrayList<Students>) {

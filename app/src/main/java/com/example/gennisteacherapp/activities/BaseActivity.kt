@@ -32,6 +32,22 @@ open class BaseActivity : AppCompatActivity() {
         val intent = Intent(this@BaseActivity, MainActivity::class.java)
         startActivity(intent)
     }
+    fun openTeacherEditPhotoActivity(context: Context) {
+        val intent = Intent(this@BaseActivity, TeacherEditPhotoActivity::class.java)
+        startActivity(intent)
+    }
+    fun openTeacherEditProfileDataActivity(context: Context) {
+        val intent = Intent(this@BaseActivity, TeacherEditProfileDataActivity::class.java)
+        startActivity(intent)
+    }
+    fun openEventActivity(context: Context) {
+        val intent = Intent(this@BaseActivity, EventActivity::class.java)
+        startActivity(intent)
+    }
+    fun openProfileActivity(context: Context) {
+        val intent = Intent(this@BaseActivity, ProfileActivity::class.java)
+        startActivity(intent)
+    }
     fun openLogInActivity(context: Context) {
         val intent = Intent(this@BaseActivity, LogInActivity::class.java)
         startActivity(intent)
@@ -39,6 +55,10 @@ open class BaseActivity : AppCompatActivity() {
 
     fun openTeacherPageActivity(context: Context) {
         val intent = Intent(this@BaseActivity, TeacherPageActivity::class.java)
+        startActivity(intent)
+    }
+    fun openListOfStudentsActivity(context: Context) {
+        val intent = Intent(this@BaseActivity, ListOfStudentsActivity::class.java)
         startActivity(intent)
     }
 }

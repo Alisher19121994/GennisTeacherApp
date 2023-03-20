@@ -8,18 +8,21 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_foreground"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-
+        <activity android:name=".activities.EventActivity" />
+        <activity android:name=".activities.TeacherEditPhotoActivity" />
+        <activity android:name=".activities.TeacherEditProfileDataActivity" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.ListOfStudentsActivity" />
         <activity android:name=".activities.LogInActivity" />
         <activity android:name=".activities.TeacherPageActivity" />
         <activity android:name=".activities.MainActivity" />
-
-
         <activity
             android:name=".activities.SplashActivity"
             android:exported="true">

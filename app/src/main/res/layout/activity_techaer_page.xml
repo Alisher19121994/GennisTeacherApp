@@ -76,13 +76,13 @@
             android:layout_height="56dp"
             android:layout_alignParentBottom="true"
             android:layout_gravity="start"
-            android:background="#07000000"
+            android:background="#100F90F6"
             android:elevation="8dp"
             app:elevation="0dp"
             app:itemIconSize="24dp"
             app:itemIconTint="#0F90F6"
             app:itemTextColor="#0F90F6"
-            app:labelVisibilityMode="labeled"
+            app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_navigation" />
 
 

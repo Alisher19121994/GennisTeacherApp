@@ -3,7 +3,6 @@ package com.example.gennisteacherapp.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.ListFragment
 import androidx.viewpager.widget.ViewPager
 import com.example.gennisteacherapp.R
 import com.example.gennisteacherapp.fragment.AttendanceFragment
@@ -17,6 +16,9 @@ class TeacherPageActivity : BaseActivity() {
 
     private lateinit var menuItem: MenuItem
 
+    companion object{
+        var USER_ID = "user_id"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_techaer_page)
@@ -31,6 +33,8 @@ class TeacherPageActivity : BaseActivity() {
         }
         onClicked()
         fragmentData()
+       // var userId = intent.getSerializableExtra(USER_ID) as GroupPage
+
     }
 
     private fun onClicked() {

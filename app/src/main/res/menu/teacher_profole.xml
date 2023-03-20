@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/baseline_more_vert_24"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+
+
+            <item
+                android:id="@+id/teacher_edit_profile_data_id"
+                android:icon="@drawable/baseline_create_24"
+                android:title="Edit profile data" />
+
+            <item
+                android:id="@+id/teacher_edit_profile_photo_id"
+                android:icon="@drawable/baseline_photo_camera_24"
+                android:title="Edit photo" />
+            <item
+                android:id="@+id/teacher_check_up_id"
+                android:icon="@drawable/baseline_event_available_24"
+                android:title="Check up" />
+
+            <item
+                android:id="@+id/teacher_edit_profile_log_out_id"
+                android:icon="@drawable/baseline_exit_to_app_24"
+                android:title="Log out" />
+        </menu>
+
+    </item>
+</menu>
