@@ -7,6 +7,7 @@ import android.view.WindowManager
 import com.example.gennisteacherapp.R
 import com.example.gennisteacherapp.model.room.UserSignIn
 import com.example.gennisteacherapp.network.roomDatabase.LogInDatabase
+import com.example.gennisteacherapp.network.roomDatabase.SessionManager
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : BaseActivity() {
@@ -30,10 +31,13 @@ class SplashActivity : BaseActivity() {
 
             override fun onFinish() {
                 val userSignIn = UserSignIn()
-                userSignIn.username
-                userSignIn.isLogged = true
-                val isLoggedIn = LogInDatabase.getDatabase(context)?.logInDao()?.loginUser()
-                if (isLoggedIn!!.contains(userSignIn)) {
+                // userSignIn.username
+                //userSignIn.username
+              //  userSignIn.isLogged = true
+                //val isLoggedIn = LogInDatabase.getDatabase(context)?.logInDao()?.loginUser()
+                val sessionManager=SessionManager(context)
+
+                if (sessionManager.fetchLogin().equals("true")) {
                     openMainActivity(context)
                 } else {
                     openLogInActivity(context)

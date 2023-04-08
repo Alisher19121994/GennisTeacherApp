@@ -1,13 +1,15 @@
 package com.example.gennisteacherapp.activities
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gennisteacherapp.R
 import com.example.gennisteacherapp.adapter.GroupTitlesAdapter
-import com.example.gennisteacherapp.model.groupList.GroupListData
+import com.example.gennisteacherapp.model.groups.Group
+import com.example.gennisteacherapp.model.groups.GroupsOfData
 import com.example.gennisteacherapp.network.retrofit.RetrofitHttp
 import com.example.gennisteacherapp.network.roomDatabase.SessionManager
 import com.example.gennisteacherapp.utils.Extensions.toast
@@ -16,67 +18,67 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : BaseActivity(), GroupTitlesAdapter.OnclickListener {
+
+class MainActivity : BaseActivity() {
 
     lateinit var recyclerView: RecyclerView
-    private var list = ArrayList<GroupListData>()
-
-
+    private val adapter: GroupTitlesAdapter by lazy { GroupTitlesAdapter(::onGroupClicked) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initViews()
     }
-    private fun initViews() {
 
+    private fun onGroupClicked(data: Group) {
+        val intent = Intent(this, TeacherPageActivity::class.java)
+        intent.putExtra("id", data.id)
+        startActivity(intent)
+    }
+
+    private fun initViews() {
         recyclerView = findViewById(R.id.main_RecyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this, 1)
-        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
 
         profile_image_in_toolbar_id.setOnClickListener {
             openProfileActivity(context)
         }
         apiList()
         swipeRefreshLayout()
-
     }
 
     private fun apiList() {
-
         val dialog = Dialog(context)
         showProgressBar(dialog)
-
-//          val idIntent = intent.getSerializableExtra("dataId")
-//            id = idIntent!!.toString()
         val sessionManager = SessionManager(context)
 
-        RetrofitHttp.retrofitService().listMethod(token="Bearer${sessionManager.fetchAuthToken()}").enqueue(object : Callback<ArrayList<GroupListData>> {
-                override fun onResponse(call: Call<ArrayList<GroupListData>>, response: Response<ArrayList<GroupListData>>) {
+        RetrofitHttp.retrofitService().singleListMethod(
+            token = "Bearer ${sessionManager.fetchAuthToken()}",
+            id = sessionManager.fetchId()
+        ).enqueue(object : Callback<GroupsOfData> {
 
-                    list.clear()
-                    val itemsResponse = response.body()
-                    if (itemsResponse != null) {
-                        for (item in itemsResponse) {
-                            val listOfData = GroupListData(item.subject!!, item.typeOfCourse!!)
-                            list.add(listOfData)
-                        }
-
-                    }
-                    dismissProgressBar(dialog)
-                    refreshAdapter(list)
-
-                    Log.d("@@@-success", response.body().toString())
-                    toast("Welcome")
+            override fun onResponse(call: Call<GroupsOfData>, response: Response<GroupsOfData>) {
+                dismissProgressBar(dialog)
+                val body = response.body()
+                swipeRefreshLayout_main_id.isRefreshing = false
+                if (response.isSuccessful && body != null) {
+                    val list = body.groups ?: emptyList()
+                    adapter.submitList(list)
                 }
 
-                override fun onFailure(call: Call<ArrayList<GroupListData>>, t: Throwable) {
-                    dismissProgressBar(dialog)
-                    toast("Error")
-                    Log.d("@@@-error", t.message.toString())
-                }
+                Log.d("@@@s", response.body().toString())
+                toast("Welcome")
+            }
 
-            })
+            override fun onFailure(call: Call<GroupsOfData>, t: Throwable) {
+                swipeRefreshLayout_main_id.isRefreshing = false
+                dismissProgressBar(dialog)
+                toast("Error")
+                Log.d("@@@e", t.message.toString())
+            }
+        })
+        // recyclerView.addOnItemTouchListener()
     }
 
     private fun swipeRefreshLayout() {
@@ -84,31 +86,5 @@ class MainActivity : BaseActivity(), GroupTitlesAdapter.OnclickListener {
         swipeRefreshLayout_main_id.setOnRefreshListener {
             apiList()
         }
-    }
-
-    private fun refreshAdapter(data: ArrayList<GroupListData>) {
-        val adapter = GroupTitlesAdapter(this, data)
-        recyclerView.adapter = adapter
-    }
-
-    override fun onClick(position: Int) {
-
-        toast("Clicked: $position")
-        //  val g = GroupPage()
-//        val fragment = ListsFragment()
-//        val bundle = Bundle()
-//        bundle.putString("user_id","user" )
-//        fragment.arguments = bundle
-        // startActivity(Intent(this@MainActivity, ListsFragment::class.java))
-
-//        val groupPage = list[position]
-//        val intent = Intent(this@MainActivity,ListsFragment::class.java)
-//        intent.putExtra(ListsFragment.USER_ID,groupPage)
-//        startActivity(intent)
-
-        // val intent = Intent(this@MainActivity, ListsFragment::class.java)
-        //intent.putExtra("groupName",list[position].groupName)
-        //intent.putExtra("subject",list[position].subject)
-        //startActivity(intent)
     }
 }

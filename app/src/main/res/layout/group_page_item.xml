@@ -47,7 +47,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <LinearLayout
+         <!--       <LinearLayout
                     android:id="@+id/home_more_liner_layout_id"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/baseline_more_vert_24" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
             </LinearLayout>
 
@@ -74,15 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <!--   <ImageView
-                    android:id="@+id/rasimni_ol"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:padding="7dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/generalenglish" />
-                    -->
+
                 <ImageView
                     android:id="@+id/rasimni_ol"
                     android:layout_width="match_parent"

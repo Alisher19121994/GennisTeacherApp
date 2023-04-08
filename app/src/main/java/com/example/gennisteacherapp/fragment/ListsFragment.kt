@@ -1,6 +1,7 @@
 package com.example.gennisteacherapp.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,9 +14,15 @@ import com.example.gennisteacherapp.R
 import com.example.gennisteacherapp.adapter.ListOfStudentsAdapter
 import com.example.gennisteacherapp.adapter.helper.RecyclerItemTouchHelper
 import com.example.gennisteacherapp.adapter.helper.RecyclerItemTouchHelperListener
+import com.example.gennisteacherapp.model.groups.GroupsOfData
 import com.example.gennisteacherapp.model.inner.Students
+import com.example.gennisteacherapp.network.retrofit.RetrofitHttp
+import com.example.gennisteacherapp.network.roomDatabase.SessionManager
 import kotlinx.android.synthetic.main.fragment_lists.*
 import kotlinx.android.synthetic.main.fragment_lists.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * A simple [Fragment] subclass.
@@ -24,12 +31,7 @@ import kotlinx.android.synthetic.main.fragment_lists.view.*
  */
 class ListsFragment : Fragment() {
 
-
     private lateinit var recyclerView: RecyclerView
-
-    companion object {
-        var USER_ID = "user_id"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +43,6 @@ class ListsFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
-
         recyclerView = view.findViewById(R.id.list_RecyclerViews_id)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.addItemDecoration(
@@ -64,34 +65,7 @@ class ListsFragment : Fragment() {
             })
 
         ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView)
-
-       // swipeRefreshLayout(view)
-
-
-        //  view.swipeRefreshLayout_id.setOnRefreshListener {
-
-        refreshAdapter(data())
-      //  val a = arguments?.getString("user_id", "Begzod")
-
-    }
-
-    private fun swipeRefreshLayout(view: View) {
-        view.swipeRefreshLayout_id.setColorSchemeResources(R.color.run)
-        swipeRefreshLayout_id.setOnRefreshListener {
-            //apiList()
-        }
-    }
-
-    private fun data(): ArrayList<Students> {
-        val l = ArrayList<Students>()
-
-        for (i in 1..10) {
-            l.add(Students(R.drawable.bekzod, "Daminov", "Alisher"))
-        }
-        return l
-        // onResponse-> ....some data
-        //refreshAdapter(list) bellow
-        // swipeRefreshLayout_id.setRefreshing(false)
+        apiListData()
     }
 
     private fun refreshAdapter(data: ArrayList<Students>) {
@@ -99,4 +73,30 @@ class ListsFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
+    private fun apiListData() {
+        val id = requireActivity().intent.getIntExtra("id", 0)
+        val sessionManager = SessionManager(requireContext())
+
+        view?.progressBar_id?.visibility = View.VISIBLE
+        RetrofitHttp.retrofitService().studentsListMethod(
+            token = "Bearer ${sessionManager.fetchAuthToken()}",
+            id = id
+        )
+            .enqueue(object : Callback<Any> {
+                override fun onResponse(
+                    call: Call<Any>,
+                    response: Response<Any>
+                ) {
+                    if (response.isSuccessful) {
+                        view?.progressBar_id?.visibility = View.GONE
+                        Log.d("@@@s", response.body().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<Any>, t: Throwable) {
+                    Log.d("@@@e", t.message.toString())
+                    view?.progressBar_id?.visibility = View.GONE
+                }
+            })
+    }
 }

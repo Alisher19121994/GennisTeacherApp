@@ -21,7 +21,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -37,7 +37,7 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
@@ -50,16 +50,20 @@ dependencies {
     //  for rest api
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
+
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+
 
     //OkHttp Libraries
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.1'
 
     //  for local database
-    implementation 'androidx.room:room-runtime:2.5.0'
-    implementation 'androidx.room:room-ktx:2.5.0'
+    implementation 'androidx.room:room-runtime:2.5.1'
+    implementation 'androidx.room:room-ktx:2.5.1'
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
-    kapt("androidx.room:room-compiler:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.1")
 
     //Image picker a FishBun with Glide
     implementation 'io.github.sangcomz:fishbun:1.0.0-beta01'

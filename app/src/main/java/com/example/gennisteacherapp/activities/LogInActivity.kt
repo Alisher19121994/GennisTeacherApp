@@ -68,7 +68,7 @@ class LogInActivity : BaseActivity() {
 
         val loginRequest = LoginRequest(username, password)
 
-        RetrofitHttp.retrofitService().postMethod(loginRequest).enqueue(object : Callback<LoginResponse> {
+        RetrofitHttp.retrofitService().loginPostMethod(loginRequest).enqueue(object : Callback<LoginResponse> {
 
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
 
@@ -80,15 +80,20 @@ class LogInActivity : BaseActivity() {
 
                         val data = response.body()
                         val sessionManager = SessionManager(context)
+
+
                         sessionManager.saveAuthToken(data?.data!!.access_token)
+                        sessionManager.saveId(data.data.id)
+                        sessionManager.saveLogin(response.body()!!.success)
+
                         Log.d("response@@Success", data.toString())
 
 //                        val intent = Intent(this@LogInActivity, MainActivity::class.java)
 //                        val bundle = Bundle()
-//                        bundle.putSerializable("username", data.data.username)
-//                        bundle.putSerializable("success",data.success)
+//                        bundle.putSerializable("id", data.data.id)
 //                        intent.putExtras(bundle)
 //                        startActivity(intent)
+                        openMainActivity(context)
 
 
                         val userSignIn = UserSignIn()
