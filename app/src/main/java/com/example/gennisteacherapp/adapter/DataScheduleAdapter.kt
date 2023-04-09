@@ -15,7 +15,7 @@ import com.example.gennisteacherapp.fragment.AttendanceFragment
 import com.example.gennisteacherapp.model.inner.DateOfSchedule
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class DataScheduleAdapter(var context: Context, var list:ArrayList<DateOfSchedule>):
+class DataScheduleAdapter(var list:ArrayList<DateOfSchedule>):
 RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -34,10 +34,7 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>(){
             holder.dataOfTime.text = dateOfSchedule.data
             holder.attendanceNumber.text = dateOfSchedule.attendances
             holder.absenceNumber.text = dateOfSchedule.absence
-
-//            holder.attendanceLinearLayout.setOnClickListener {
-//                context.startActivity(Intent(context,ListOfStudentsActivity::class.java))
-//            }
+            holder.eplicableNumber.text = dateOfSchedule.eplicableNumber
         }
     }
 
@@ -46,31 +43,6 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>(){
         var dataOfTime:TextView = item.findViewById(R.id.dataOfTime_id)
         var attendanceNumber:TextView = item.findViewById(R.id.attendanceNumber_id)
         var absenceNumber:TextView = item.findViewById(R.id.absenceNumber_id)
+        var eplicableNumber:TextView = item.findViewById(R.id.eplicableNumber_id)
     }
-
-//    private fun bottomSheetDialog(){
-//        val dialog = BottomSheetDialog(context)
-//        dialog.setContentView(R.layout.bottom_sheet_dialog)
-//        dialog.setCancelable(true)
-//
-//
-//        //val btnEdit= dialog.findViewById<RelativeLayout>(R.id.rl_edit)
-//       // val btnDelete= dialog.findViewById<RelativeLayout>(R.id.rl_delete)
-//        //val btnAdd= dialog.findViewById<RelativeLayout>(R.id.rl_add)
-//
-////        btnEdit?.setOnClickListener {
-////            Toast.makeText(this, "Clicked on Edit", Toast.LENGTH_SHORT).show()
-////        }
-////        btnDelete?.setOnClickListener {
-////            Toast.makeText(this, "Clicked on Delete", Toast.LENGTH_SHORT).show()
-////        }
-////        btnAdd?.setOnClickListener {
-////            Toast.makeText(this, "Clicked on Add", Toast.LENGTH_SHORT).show()
-////        }
-//        dialog.show()
-//    }
-//    private fun refreshAdapter(){
-//        //val adapter = BottomSheetAdapter(context,list)
-//       //recyclerView_bottom_sheet_id
-//    }
 }

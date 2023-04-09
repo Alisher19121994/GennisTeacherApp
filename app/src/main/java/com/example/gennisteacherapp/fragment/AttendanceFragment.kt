@@ -41,15 +41,25 @@ class AttendanceFragment : Fragment() {
         recyclerViewMain = view.findViewById(R.id.recyclerView_attendance_id)
         recyclerViewMain.layoutManager = GridLayoutManager(requireContext(),3)
 
-        val list = ArrayList<DateOfSchedule>()
-        for (i in 1..12) {
-            list.add(DateOfSchedule("15.02.2023", "9", "3"))
+
+        refreshAdapterMain(a())
+
+    }
+    fun a():ArrayList<DateOfSchedule>{
+        val a = ArrayList<DateOfSchedule>()
+
+        a.add(DateOfSchedule("10-04-2023","12","2",""))
+        a.add(DateOfSchedule("10-04-2023","10","4",""))
+        a.add(DateOfSchedule("10-04-2023","7","4",""))
+
+        for (i in 1..11){
+            a.add(DateOfSchedule("10-04-2023","12","","1"))
         }
-        refreshAdapterMain(list)
+        return a
     }
 
     private fun refreshAdapterMain(list: ArrayList<DateOfSchedule>) {
-        val adapter = DataScheduleAdapter(requireContext(), list)
+        val adapter = DataScheduleAdapter(list)
         recyclerViewMain.adapter = adapter
     }
 

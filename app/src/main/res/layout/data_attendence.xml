@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:orientation="vertical"
-    android:padding="7sp">
+    android:padding="4sp">
 
     <LinearLayout
         android:id="@+id/attendance_linear_layout_id"
         android:layout_width="130dp"
         android:layout_height="100dp"
-        android:layout_marginStart="8dp"
         android:background="@drawable/data"
         android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="100dp"
-            android:layout_height="35dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:gravity="center"
-            android:padding="3sp">
+            android:padding="5sp">
 
             <TextView
                 android:id="@+id/dataOfTime_id"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:gravity="center"
                 android:text="15.02.2023"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="5sp"
+            android:layout_marginTop="3sp"
             android:gravity="center_vertical|center_horizontal"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="7dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:background="@drawable/checked"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="3dp">
@@ -54,14 +53,15 @@
                     android:layout_height="wrap_content"
                     android:text="9"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginEnd="7dp"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:background="@drawable/unchecked"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="3sp">
@@ -72,12 +72,15 @@
                     android:layout_height="wrap_content"
                     android:text="3"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:background="@drawable/eplicable"
                 android:gravity="center_horizontal|center_vertical"
                 android:padding="3sp">
@@ -88,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="1"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

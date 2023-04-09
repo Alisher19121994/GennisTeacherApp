@@ -13,13 +13,23 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/fullname_id"
+            android:id="@+id/name_id"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10sp"
             android:layout_weight="1"
             android:singleLine="true"
-            android:text="Alisher Daminov"
+            android:textColor="@color/black"
+            android:textSize="19sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/lastName_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:layout_weight="1"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="19sp"
             android:textStyle="normal" />

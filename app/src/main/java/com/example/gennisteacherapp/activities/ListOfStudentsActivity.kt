@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gennisteacherapp.R
-import com.example.gennisteacherapp.adapter.BottomSheetAdapter
+import com.example.gennisteacherapp.adapter.CreateAdapter
 import com.example.gennisteacherapp.model.inner.BottomSheetData
 
 class ListOfStudentsActivity : BaseActivity() {
@@ -30,11 +30,11 @@ class ListOfStudentsActivity : BaseActivity() {
         for (i in 1..20) {
             list.add(BottomSheetData("Alisher Daminov"))
         }
-        refreshAdapter(list)
+      //  refreshAdapter(list)
     }
 
-    private fun refreshAdapter(list: ArrayList<BottomSheetData>) {
-        val adapter = BottomSheetAdapter(this, list)
-        recyclerView.adapter = adapter
-    }
+//    private fun refreshAdapter(list: ArrayList<BottomSheetData>) {
+//        val adapter = ListOfStudentsActivity(list)
+//        recyclerView.adapter = adapter
+//    }
 }

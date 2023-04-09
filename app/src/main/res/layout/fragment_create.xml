@@ -18,8 +18,21 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_bottom_sheet_id"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="50dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_marginBottom="50dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <ProgressBar
+                    android:id="@+id/progressBar_data_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="@color/run"
+                    android:visibility="visible" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,12 +45,12 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="16sp"
                     android:layout_marginEnd="16sp"
-                    android:textStyle="bold"
+                    android:layout_marginBottom="6sp"
+                    android:background="@drawable/save"
                     android:text="@string/save"
                     android:textAllCaps="false"
-                    android:background="@drawable/save"
                     android:textSize="20sp"
-                    android:layout_marginBottom="6sp" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </FrameLayout>

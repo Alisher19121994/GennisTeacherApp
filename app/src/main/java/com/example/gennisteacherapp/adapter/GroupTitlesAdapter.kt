@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gennisteacherapp.R
 import com.example.gennisteacherapp.model.groups.Group
 
-class GroupTitlesAdapter(
-    private val onClick: (Group) -> Unit
-) : ListAdapter<Group, GroupTitlesAdapter.GroupTitleViewHolder>(COMPARATOR) {
+class GroupTitlesAdapter(private val onClick: (Group) -> Unit) : ListAdapter<Group, GroupTitlesAdapter.GroupTitleViewHolder>(COMPARATOR) {
 
     companion object {
         val COMPARATOR: DiffUtil.ItemCallback<Group> = object : DiffUtil.ItemCallback<Group>() {
@@ -25,8 +23,7 @@ class GroupTitlesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroupTitleViewHolder {
-        val view: View =
-            LayoutInflater.from(parent.context).inflate(R.layout.group_page_item, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.group_page_item, parent, false)
         return GroupTitleViewHolder(view)
     }
 

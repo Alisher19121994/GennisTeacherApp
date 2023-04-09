@@ -62,23 +62,18 @@ class MainActivity : BaseActivity() {
                 dismissProgressBar(dialog)
                 val body = response.body()
                 swipeRefreshLayout_main_id.isRefreshing = false
-                if (response.isSuccessful && body != null) {
+                if (response.isSuccessful &&   body != null) {
                     val list = body.groups ?: emptyList()
                     adapter.submitList(list)
                 }
-
-                Log.d("@@@s", response.body().toString())
-                toast("Welcome")
             }
 
             override fun onFailure(call: Call<GroupsOfData>, t: Throwable) {
                 swipeRefreshLayout_main_id.isRefreshing = false
                 dismissProgressBar(dialog)
-                toast("Error")
-                Log.d("@@@e", t.message.toString())
+                toast("check your internet !")
             }
         })
-        // recyclerView.addOnItemTouchListener()
     }
 
     private fun swipeRefreshLayout() {

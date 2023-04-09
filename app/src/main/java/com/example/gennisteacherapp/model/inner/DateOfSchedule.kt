@@ -1,3 +1,3 @@
 package com.example.gennisteacherapp.model.inner
 
-data class DateOfSchedule(var data:String,var attendances:String,var absence:String)
+data class DateOfSchedule(var data:String,var attendances:String,var absence:String,var eplicableNumber:String)
