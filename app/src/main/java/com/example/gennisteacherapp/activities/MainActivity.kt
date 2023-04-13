@@ -36,17 +36,31 @@ class MainActivity : BaseActivity() {
         startActivity(intent)
     }
 
+
     private fun initViews() {
         recyclerView = findViewById(R.id.main_RecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        profile_image_in_toolbar_id.setOnClickListener {
-            openProfileActivity(context)
-        }
         apiList()
         swipeRefreshLayout()
+        profile_image_in_toolbar_id.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("id",profile_image_in_toolbar_id.toString())
+            startActivity(intent)
+        }
+
+      //  sendIdToProfile(Group(0,"",0,0,"",0,"","","",""))
     }
+
+    private fun sendIdToProfile(data:Group) {
+        profile_image_in_toolbar_id.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("id", data.id)
+            startActivity(intent)
+        }
+    }
+
 
     private fun apiList() {
         val dialog = Dialog(context)
@@ -65,6 +79,8 @@ class MainActivity : BaseActivity() {
                 if (response.isSuccessful &&   body != null) {
                     val list = body.groups ?: emptyList()
                     adapter.submitList(list)
+
+
                 }
             }
 

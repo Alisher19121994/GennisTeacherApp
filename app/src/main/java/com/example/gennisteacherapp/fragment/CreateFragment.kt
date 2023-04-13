@@ -63,10 +63,7 @@ class CreateFragment : Fragment() {
                 if (response.isSuccessful && body !=null ){
                     val list = body.data.students
                     refreshAdapter(list as ArrayList<Student>)
-
                 }
-
-
             }
 
             override fun onFailure(call: Call<AttendanceData>, t: Throwable) {

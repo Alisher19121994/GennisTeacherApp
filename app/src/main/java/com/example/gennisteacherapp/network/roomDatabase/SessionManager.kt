@@ -26,7 +26,7 @@ class SessionManager (context: Context) {
         editor.putInt(ID, id)
         editor.apply()
     }
-    fun fetchId(): Int? {
+    fun fetchId(): Int {
         return prefs.getInt(ID, 0)
     }
     fun saveLogin(loginResponse: Boolean) {

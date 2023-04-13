@@ -27,7 +27,6 @@ object RetrofitHttp {
 
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            //.addConverterFactory(ScalarsConverterFactory.create())
             .baseUrl("")
             .client(okHttpClient)
             .build()
