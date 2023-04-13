@@ -13,11 +13,10 @@ import com.example.gennisteacherapp.model.inner.Students
 import com.google.android.material.imageview.ShapeableImageView
 
 class ListOfStudentsAdapter(
-    var listOfStudents: ArrayList<Student>
-) :
+    var listOfStudents: ArrayList<Student>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.list_students, parent, false)
         return ListOfStudentsViewHolder(view)
     }
@@ -35,8 +34,6 @@ class ListOfStudentsAdapter(
             Glide.with(holder.itemView.context).load(student.photo_profile).into(holder.profilePicture)
             holder.lastName.text =student.surname
             holder.name.text = student.name
-
-
 
         }
     }

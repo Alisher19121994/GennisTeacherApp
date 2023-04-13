@@ -50,16 +50,9 @@ class MainActivity : BaseActivity() {
             startActivity(intent)
         }
 
-      //  sendIdToProfile(Group(0,"",0,0,"",0,"","","",""))
     }
 
-    private fun sendIdToProfile(data:Group) {
-        profile_image_in_toolbar_id.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            intent.putExtra("id", data.id)
-            startActivity(intent)
-        }
-    }
+
 
 
     private fun apiList() {

@@ -174,11 +174,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/teacher_profile_username"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:layout_weight="1"
-                                    android:text="@string/username"
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
                                     android:textSize="16sp"
@@ -202,11 +202,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/teacher_profile_age"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:layout_weight="1"
-                                    android:text="Age"
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
                                     android:textSize="16sp"
@@ -230,11 +230,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/teacher_profile_date_of_birth"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:layout_weight="1"
-                                    android:text="Date of birth"
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
                                     android:textSize="16sp"
@@ -258,11 +258,11 @@
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/teacher_profile_phone_number"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="5dp"
                                     android:layout_weight="1"
-                                    android:text="Phone_number"
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
                                     android:textSize="16sp"
@@ -286,16 +286,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_marginTop="10sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/mainRecyclerView"/>
-                </LinearLayout>
 
             </LinearLayout>
 

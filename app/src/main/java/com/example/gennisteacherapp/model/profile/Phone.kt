@@ -1,12 +1,14 @@
 package com.example.gennisteacherapp.model.profile
 
  class Phone{
-    val name: String?=null
+    var name: String?=null
     val order: Int?=null
     var value: String?=null
      constructor()
-     constructor(value: String?) {
+     constructor(name: String?, value: String?) {
+         this.name = name
          this.value = value
      }
+
 
  }
