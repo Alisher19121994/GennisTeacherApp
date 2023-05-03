@@ -86,15 +86,15 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="220dp"
                             android:gravity="center_vertical|center_horizontal"
                             android:orientation="horizontal"
                             android:padding="10sp">
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/teacher_profile_image_id"
-                                android:layout_width="75dp"
-                                android:layout_height="75dp"
+                                android:layout_width="200dp"
+                                android:layout_height="match_parent"
                                 android:adjustViewBounds="true"
                                 android:padding="3dp"
                                 android:scaleType="centerCrop"
@@ -288,8 +288,6 @@
 
 
             </LinearLayout>
-
-
 
 
         </androidx.core.widget.NestedScrollView>

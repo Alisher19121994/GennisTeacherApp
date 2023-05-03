@@ -31,6 +31,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onGroupClicked(data: Group) {
+        val groupId = SessionManager(context)
+        groupId.saveGroupId(data.id)
         val intent = Intent(this, TeacherPageActivity::class.java)
         intent.putExtra("id", data.id)
         startActivity(intent)
@@ -68,12 +70,12 @@ class MainActivity : BaseActivity() {
             override fun onResponse(call: Call<GroupsOfData>, response: Response<GroupsOfData>) {
                 dismissProgressBar(dialog)
                 val body = response.body()
+
                 swipeRefreshLayout_main_id.isRefreshing = false
                 if (response.isSuccessful &&   body != null) {
+
                     val list = body.groups ?: emptyList()
                     adapter.submitList(list)
-
-
                 }
             }
 
@@ -89,6 +91,8 @@ class MainActivity : BaseActivity() {
         swipeRefreshLayout_main_id.setColorSchemeResources(R.color.run)
         swipeRefreshLayout_main_id.setOnRefreshListener {
             apiList()
+            val sessionManager = SessionManager(context)
+            sessionManager.fetchRefreshToken()
         }
     }
 }

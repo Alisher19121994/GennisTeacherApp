@@ -27,7 +27,8 @@ object RetrofitHttp {
 
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl("")
+           // .baseUrl("https://www.gennis.uz/api/")
+            .baseUrl("http://176.96.243.55/api/")
             .client(okHttpClient)
             .build()
     }

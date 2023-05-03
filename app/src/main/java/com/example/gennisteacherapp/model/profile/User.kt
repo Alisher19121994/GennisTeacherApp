@@ -13,7 +13,6 @@ package com.example.gennisteacherapp.model.profile
     val type_role: String?=null
     val username: String?=null
 
-     constructor()
      constructor(info: Info?) {
          this.info = info
      }

@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="run">#0EAAF1</color>
     <color name="error">#E30A0A</color>
+    <color name="ok">#03DF0C</color>
     <color name="white">#FFFFFFFF</color>
 </resources>

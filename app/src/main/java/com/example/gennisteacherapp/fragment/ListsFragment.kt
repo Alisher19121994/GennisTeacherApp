@@ -1,5 +1,6 @@
 package com.example.gennisteacherapp.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gennisteacherapp.R
+import com.example.gennisteacherapp.activities.MainActivity
 import com.example.gennisteacherapp.adapter.ListOfStudentsAdapter
 import com.example.gennisteacherapp.adapter.helper.RecyclerItemTouchHelper
 import com.example.gennisteacherapp.adapter.helper.RecyclerItemTouchHelperListener
@@ -26,6 +28,7 @@ import kotlinx.android.synthetic.main.groups_data.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 class ListsFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
@@ -40,6 +43,10 @@ class ListsFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
+//        view.back_linear_id.setOnClickListener {
+//            requireActivity().startActivity(Intent(requireContext(),MainActivity::class.java))
+//        }
+
         recyclerView = view.findViewById(R.id.list_RecyclerViews_id)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.addItemDecoration(
@@ -67,13 +74,14 @@ class ListsFragment : Fragment() {
         refreshData(view)
     }
 
-    private fun refreshData(view: View){
-        view.swipeRefreshLayout_id?.setColorSchemeResources(R.color.run)
-        view.swipeRefreshLayout_id?.setOnRefreshListener {
-            apiListData()
-            apiListOfGroup(view)
-        }
+    private fun refreshData(view: View) {
+//        view.swipeRefreshLayout_id?.setColorSchemeResources(R.color.run)
+//        view.swipeRefreshLayout_id?.setOnRefreshListener {
+//            apiListData()
+//            apiListOfGroup(view)
+//        }
     }
+
     private fun refreshAdapter(data: ArrayList<Student>) {
         val adapter = ListOfStudentsAdapter(data)
         recyclerView.adapter = adapter
@@ -84,13 +92,18 @@ class ListsFragment : Fragment() {
         val sessionManager = SessionManager(requireContext())
 
         view?.progressBar_id?.visibility = View.VISIBLE
-        RetrofitHttp.retrofitService().studentsListMethod(token = "Bearer ${sessionManager.fetchAuthToken()}", id = id).enqueue(object : Callback<DataOfGroups> {
+        RetrofitHttp.retrofitService()
+            .studentsListMethod(token = "Bearer ${sessionManager.fetchAuthToken()}", id = id)
+            .enqueue(object : Callback<DataOfGroups> {
 
-                override fun onResponse(call: Call<DataOfGroups>, response: Response<DataOfGroups>) {
+                override fun onResponse(
+                    call: Call<DataOfGroups>,
+                    response: Response<DataOfGroups>
+                ) {
                     view?.progressBar_id?.visibility = View.GONE
-                    view?.swipeRefreshLayout_id?.isRefreshing = false
+                    //view?.swipeRefreshLayout_id?.isRefreshing = false
 
-                    if (response.isSuccessful && response.body() !=null) {
+                    if (response.isSuccessful && response.body() != null) {
 
                         refreshAdapter(response.body()!!.data.students as ArrayList<Student>)
                     }
@@ -98,7 +111,7 @@ class ListsFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<DataOfGroups>, t: Throwable) {
-                    view?.swipeRefreshLayout_id?.isRefreshing = false
+                   // view?.swipeRefreshLayout_id?.isRefreshing = false
                     view?.progressBar_id?.visibility = View.GONE
                 }
             })
@@ -110,29 +123,31 @@ class ListsFragment : Fragment() {
 
 
         val sessionManager = SessionManager(requireContext())
-        RetrofitHttp.retrofitService().profileStudentsListMethod(token = "Bearer ${sessionManager.fetchAuthToken()}",
-            id = id).enqueue(object: Callback<DataOfGroups>{
+        RetrofitHttp.retrofitService().profileStudentsListMethod(
+            token = "Bearer ${sessionManager.fetchAuthToken()}",
+            id = id
+        ).enqueue(object : Callback<DataOfGroups> {
             override fun onResponse(call: Call<DataOfGroups>, response: Response<DataOfGroups>) {
                 view.progressBar_id?.visibility = View.GONE
 
                 val body = response.body()
-                if (response.isSuccessful && body!=null){
+                if (response.isSuccessful && body != null) {
 
                     eduLang_edu.text = body.data.information.eduLang.name
                     groupCourseType_n.text = body.data.information.groupCourseType.name
-                  groupName_n.text = body.data.information.groupName.name
+                    groupName_n.text = body.data.information.groupName.name
                     groupPrice_n.text = body.data.information.groupPrice.name
                     studentsLength_n.text = body.data.information.studentsLength.name
                     teacherName_n.text = body.data.information.teacherName.name
-                   teacherSalary_n.text = body.data.information.teacherSalary.name
-                   teacherSurname_n.text = body.data.information.teacherSurname.name
+                    teacherSalary_n.text = body.data.information.teacherSalary.name
+                    teacherSurname_n.text = body.data.information.teacherSurname.name
 
-                   eduLang_edu_v.text = body.data.information.eduLang.value
+                    eduLang_edu_v.text = body.data.information.eduLang.value
                     groupCourseType_v.text = body.data.information.groupCourseType.value
-                   groupName_v.text = body.data.information.groupName.value
-                   groupPrice_v.text = body.data.information.groupPrice.value.toString()
+                    groupName_v.text = body.data.information.groupName.value
+                    groupPrice_v.text = body.data.information.groupPrice.value.toString()
                     studentsLength_v.text = body.data.information.studentsLength.value.toString()
-                   teacherName_v.text = body.data.information.teacherName.value
+                    teacherName_v.text = body.data.information.teacherName.value
                     teacherSalary_v.text = body.data.information.teacherSalary.value.toString()
                     teacherSurname_v.text = body.data.information.teacherSurname.value
 

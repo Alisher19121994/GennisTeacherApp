@@ -9,13 +9,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gennisteacherapp.R
-import com.example.gennisteacherapp.activities.ListOfStudentsActivity
-import com.example.gennisteacherapp.activities.TeacherPageActivity
-import com.example.gennisteacherapp.fragment.AttendanceFragment
-import com.example.gennisteacherapp.model.inner.DateOfSchedule
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.gennisteacherapp.activities.EvaluationActivity
+import com.example.gennisteacherapp.network.roomDatabase.SessionManager
 
-class DataScheduleAdapter(var list:ArrayList<DateOfSchedule>):
+class DataScheduleAdapter(var context: Context,var list:ArrayList<com.example.gennisteacherapp.model.groups.listOfGroupData.Student>):
 RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -28,21 +25,30 @@ RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-       val dateOfSchedule :DateOfSchedule = list[position]
+       val student :com.example.gennisteacherapp.model.groups.listOfGroupData.Student = list[position]
 
         if (holder is DateViewHolder){
-            holder.dataOfTime.text = dateOfSchedule.data
-            holder.attendanceNumber.text = dateOfSchedule.attendances
-            holder.absenceNumber.text = dateOfSchedule.absence
-            holder.eplicableNumber.text = dateOfSchedule.eplicableNumber
+            holder.dataOfTime.text = student.reg_date
+            holder.attendanceNumber.text = student.id.toString()
+            holder.absenceNumber.text = student.id.toString()
+
+            holder.attendanceLinearLayout.setOnClickListener {
+                val  sessionManager = SessionManager(context)
+                val intent = Intent(context,EvaluationActivity::class.java)
+                sessionManager.saveGroupId(student.id)
+                intent.putExtra("reg_date",student.reg_date)
+                intent.putExtra("name",student.name)
+                intent.putExtra("surname",student.surname)
+                holder.itemView.context.startActivity(intent)
+            }
         }
     }
 
     inner class DateViewHolder(item:View):RecyclerView.ViewHolder(item){
         var attendanceLinearLayout:LinearLayout = item.findViewById(R.id.attendance_linear_layout_id)
+
         var dataOfTime:TextView = item.findViewById(R.id.dataOfTime_id)
         var attendanceNumber:TextView = item.findViewById(R.id.attendanceNumber_id)
         var absenceNumber:TextView = item.findViewById(R.id.absenceNumber_id)
-        var eplicableNumber:TextView = item.findViewById(R.id.eplicableNumber_id)
     }
 }

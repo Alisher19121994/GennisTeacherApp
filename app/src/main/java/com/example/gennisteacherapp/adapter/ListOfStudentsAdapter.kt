@@ -31,9 +31,15 @@ class ListOfStudentsAdapter(
 
         if (holder is ListOfStudentsViewHolder) {
 
-            Glide.with(holder.itemView.context).load(student.photo_profile).into(holder.profilePicture)
+            Glide.with(holder.itemView.context).load(student.photo_profile).placeholder(R.drawable.placeholder).into(holder.profilePicture)
             holder.lastName.text =student.surname
             holder.name.text = student.name
+
+            if (student.money > 0){
+                holder.paymentStudents.text = student.money.toString()
+            }else{
+                holder.paymentNoStudents.text = student.money.toString()
+            }
 
         }
     }
@@ -43,5 +49,8 @@ class ListOfStudentsAdapter(
         val profilePicture: ShapeableImageView = itemView.findViewById(R.id.in_my_group_students_image_id)
         val lastName: TextView = itemView.findViewById(R.id.in_my_group_students_last_name_id)
         val name: TextView = itemView.findViewById(R.id.in_my_group_students_first_name_id)
+
+        val paymentStudents: TextView = itemView.findViewById(R.id.payment_students_id)
+        val paymentNoStudents: TextView = itemView.findViewById(R.id.payment_no_students_id)
     }
 }

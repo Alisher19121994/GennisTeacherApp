@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#D9F1FB"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6sp"
+                android:gravity="center_vertical"
+                android:text="Attendance of"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+
+
+            <TextView
+                android:id="@+id/name_student_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6sp"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/surname_student_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="horizontal"
+            android:padding="10sp">
+
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="50sp"
+                android:background="@drawable/payment"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/yes_button_id"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Yes"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10sp"
+                android:background="@drawable/unpayment"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/no_button_id"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="No"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16sp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Rate"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RatingBar
+            android:id="@+id/ratingBar_id"
+            style="@style/Base.CardView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:numStars="5"
+            android:progressBackgroundTint="@color/white"
+            android:progressTint="#EFD810"
+            android:saveEnabled="true"
+            android:stepSize="1" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/submit_liner_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="26sp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/save"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

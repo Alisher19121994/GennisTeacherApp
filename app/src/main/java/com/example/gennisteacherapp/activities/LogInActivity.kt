@@ -27,8 +27,6 @@ import retrofit2.Response
 class LogInActivity : BaseActivity() {
 
     lateinit var SHARED_PREFS: String
-
-    lateinit var token: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
@@ -83,16 +81,9 @@ class LogInActivity : BaseActivity() {
 
 
                         sessionManager.saveAuthToken(data?.data!!.access_token)
+                        sessionManager.saveRefreshToken(data.data.refresh_token)
                         sessionManager.saveId(data.data.id)
                         sessionManager.saveLogin(response.body()!!.success)
-
-                        Log.d("response@@Success", data.toString())
-
-//                        val intent = Intent(this@LogInActivity, MainActivity::class.java)
-//                        val bundle = Bundle()
-//                        bundle.putSerializable("id", data.data.id)
-//                        intent.putExtras(bundle)
-//                        startActivity(intent)
                         openMainActivity(context)
 
 
@@ -104,14 +95,11 @@ class LogInActivity : BaseActivity() {
                         toast("Logged in")
                     }
                     dismissProgressBar(dialog)
-                    Log.d("@@@@@@@@Success", response.body().toString())
                 }
 
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     toast("Error")
                     dismissProgressBar(dialog)
-                    Log.d("@@@@@@@@@_####Falure", t.message.toString())
-                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                 }
 
             })

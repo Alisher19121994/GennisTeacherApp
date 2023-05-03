@@ -1,9 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".activities.TeacherEditPhotoActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Change your profile photo"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/edit_profile_image_id"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_marginTop="20sp"
+                android:adjustViewBounds="true"
+                android:padding="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/d"
+                app:shapeAppearanceOverlay="@style/circle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="51sp"
+                android:layout_marginTop="12sp"
+                android:background="@drawable/see_more_bottom">
+
+                <TextView
+                    android:id="@+id/save_textview_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ProgressBar
+                android:id="@+id/progressBar_photo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:indeterminateTint="@color/run"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

@@ -8,57 +8,6 @@
     android:orientation="vertical"
     tools:context=".activities.TeacherPageActivity">
 
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#8DE3FE"
-        android:elevation="0dp">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:elevation="0dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/back_linear_id"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_marginStart="4dp"
-                        android:src="@drawable/baseline_keyboard_backspace_24" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="170dp"
-                        android:layout_height="match_parent"
-                        android:padding="5dp"
-                        android:src="@drawable/horizontallogo" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -84,8 +33,6 @@
             app:itemTextColor="#0F90F6"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation" />
-
-
     </RelativeLayout>
     <!--<LinearLayout
         android:layout_width="match_parent"

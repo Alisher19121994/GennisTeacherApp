@@ -15,10 +15,6 @@ import kotlinx.android.synthetic.main.activity_techaer_page.*
 class TeacherPageActivity : BaseActivity() {
 
     private lateinit var menuItem: MenuItem
-
-    companion object{
-        var USER_ID = "user_id"
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_techaer_page)
@@ -27,13 +23,8 @@ class TeacherPageActivity : BaseActivity() {
     }
 
     private fun initViews() {
-
-        back_linear_id.setOnClickListener {
-            openMainActivity(context)
-        }
         onClicked()
         fragmentData()
-       // var userId = intent.getSerializableExtra(USER_ID) as GroupPage
 
     }
 
